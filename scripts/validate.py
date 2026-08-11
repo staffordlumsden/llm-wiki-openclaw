@@ -49,7 +49,19 @@ def frontmatter(path: Path):
             errors.append(f"{path.relative_to(ROOT)}: unsupported frontmatter line {line!r}")
             continue
         k,v = line.split(':',1)
-        data[k.strip()] = v.strip()
+        value = v.strip()
+        # This package intentionally uses only simple scalar frontmatter. In YAML,
+        # an unquoted ``: `` inside a plain scalar starts a new mapping and makes
+        # lines such as ``description: ... OpenClaw: initialise ...`` invalid.
+        if ": " in value and not (
+            (value.startswith('"') and value.endswith('"')) or
+            (value.startswith("'") and value.endswith("'"))
+        ):
+            errors.append(
+                f"{path.relative_to(ROOT)}: YAML scalar for {k.strip()!r} "
+                "contains an unquoted ': '"
+            )
+        data[k.strip()] = value.strip('"\'')
     return data, body
 
 main_meta, main_body = frontmatter(ROOT / "SKILL.md")
