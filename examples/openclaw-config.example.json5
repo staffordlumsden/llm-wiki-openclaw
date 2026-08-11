@@ -1,0 +1,55 @@
+// Illustrative snippets. Merge into your existing openclaw.json; do not replace it wholesale.
+{
+  agents: {
+    defaults: {
+      subagents: {
+        // Five matches llm-wiki's standard research fan-out.
+        // Deep/exhaustive workflows can run additional tasks in waves.
+        maxChildrenPerAgent: 5,
+        maxConcurrent: 5,
+      },
+    },
+    list: [
+      {
+        id: "wiki-manager",
+        workspace: "/home/YOU/.openclaw/workspace-wiki",
+        sandbox: {
+          mode: "all",
+          scope: "agent",
+          workspaceAccess: "rw",
+          docker: {
+            // Only needed if the hub is outside the workspace.
+            binds: ["/home/YOU/wiki:/wiki:rw"],
+            dangerouslyAllowExternalBindSources: true,
+          },
+        },
+        tools: {
+          allow: [
+            "read", "write", "edit", "apply_patch",
+            "web_search", "web_fetch",
+            "sessions_spawn", "sessions_yield", "subagents"
+          ],
+          // Add exec only if you need deterministic llm-wiki helpers.
+          deny: ["gateway"]
+        }
+      },
+      {
+        id: "wiki-query",
+        workspace: "/home/YOU/.openclaw/workspace-wiki-query",
+        sandbox: {
+          mode: "all",
+          scope: "agent",
+          workspaceAccess: "ro",
+          docker: {
+            binds: ["/home/YOU/wiki:/wiki:ro"],
+            dangerouslyAllowExternalBindSources: true,
+          },
+        },
+        tools: {
+          allow: ["read"],
+          deny: ["write", "edit", "apply_patch", "exec", "process", "gateway"]
+        }
+      }
+    ]
+  }
+}
