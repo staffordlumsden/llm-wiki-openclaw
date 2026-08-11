@@ -10,3 +10,12 @@ def test_validator_passes():
 def test_skills_have_distinct_names():
     assert "name: llm-wiki" in (ROOT/'SKILL.md').read_text()
     assert "name: wiki-query" in (ROOT/'profiles'/'wiki-query'/'SKILL.md').read_text()
+
+
+def test_frontmatter_descriptions_are_yaml_safe():
+    for path in [ROOT/'SKILL.md', ROOT/'profiles'/'wiki-query'/'SKILL.md']:
+        text = path.read_text(encoding='utf-8')
+        head = text[4:].split("\n---\n", 1)[0]
+        description = next(line for line in head.splitlines() if line.startswith("description:"))
+        value = description.split(":", 1)[1].strip()
+        assert value.startswith(('"', "'")) and value.endswith(('"', "'"))
