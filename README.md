@@ -148,6 +148,4 @@ Version: **0.1.0**
 Upstream baseline reviewed: **llm-wiki v0.17.1 (August 2026 repository state)**  
 OpenClaw documentation baseline reviewed: **12 August 2026**.
 
-This package has been structurally validated in the build environment. It has **not** been end-to-end executed against a live OpenClaw gateway in this ChatGPT session, so run `openclaw skills check` after installation on the target host.
-
 This package has been structurally validated in the build environment. It has not been end-to-end executed against a live OpenClaw gateway in this ChatGPT session, so run openclaw skills check after installation on the target host... mostly because i saw the upstream LLM-wiki on the way to work and got ChatGPT 5.6 Sol to help build this with ne on the train. Assume if you are reading this more than about 12 hours after the original commit that I have actually installed it and it works 😁
