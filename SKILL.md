@@ -1,6 +1,6 @@
 ---
 name: llm-wiki
-description: Manage an llm-wiki knowledge hub in OpenClaw: initialise, ingest, compile, query, research with sub-agents, audit, lint, curate inventory and datasets, capture operational sessions, and generate evidence-backed outputs.
+description: "Manage an llm-wiki knowledge hub in OpenClaw: initialise, ingest, compile, query, research with sub-agents, audit, lint, curate inventory and datasets, capture operational sessions, and generate evidence-backed outputs."
 homepage: https://github.com/nvk/llm-wiki
 user-invocable: true
 ---
