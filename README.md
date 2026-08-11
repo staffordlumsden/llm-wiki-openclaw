@@ -2,6 +2,8 @@
 
 An OpenClaw-native skill wrapper for [nvk/llm-wiki](https://github.com/nvk/llm-wiki).
 
+**Project site:** https://staffordlumsden.github.io/llm-wiki-openclaw/
+
 It preserves llm-wiki's portable knowledge model while adapting runtime behaviour to OpenClaw's current AgentSkills-compatible skill loading, filesystem/web tools and `sessions_spawn` sub-agents.
 
 ## What is included
